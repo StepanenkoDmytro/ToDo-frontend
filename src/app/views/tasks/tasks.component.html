@@ -1,0 +1,58 @@
+<div class="row mb-4">
+    <div class="col-12 mb-md-0 mb-4">
+        <div class="card">
+            <div class="card-header pb-0">
+                Список задач
+            </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Завдання</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Категорія</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Приорітет</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Статус
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Дата
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of tasks">
+                                <td>
+                                    {{ task.id }}
+                                </td>
+                                <td>
+                                    {{ task.title }}
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    {{ task.category }}
+                                </td>
+                                <td class="align-middle">
+                                    {{ task.priority }}
+                                </td>
+                                <td class="align-middle">
+                                    0
+                                </td>
+                                <td class="align-middle">
+                                    {{ task.date }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
