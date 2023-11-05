@@ -21,9 +21,9 @@
                                 [class.completed]="task.completed">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ task.title }}</td>
-                                <td>{{ task.category ? task.category.title : '' }}</td>
-                                <td>{{ task.priority ? task.priority.title : '' }}</td>
-                                <td>{{ task.date | date: 'dd MMM YY' }}</td>
+                                <td [class.no-value]="!task.category">{{ task.category ? task.category.title : 'Немає категорії' }}</td>
+                                <td [class.no-value]="!task.priority">{{ task.priority ? task.priority.title : 'Немає пріорітету' }}</td>
+                                <td [class.no-value]="!task.date">{{ task.date ? (task.date | date: 'dd MMM YY') : 'Немає дати' }}</td>
                                 <td>
                                     <div class="form-check">
                                         <input [checked]="task.completed"
