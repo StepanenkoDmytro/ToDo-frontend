@@ -12,7 +12,7 @@ import { TasksComponent } from './views/tasks/tasks.component';
     TasksComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

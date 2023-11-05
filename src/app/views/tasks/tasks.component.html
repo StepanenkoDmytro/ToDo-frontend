@@ -4,54 +4,38 @@
             <div class="card-header pb-0">
                 Список задач
             </div>
-            <div class="card-body px-0 pb-2">
-                <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                        <thead>
+            <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Завдання</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Категорія</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Приорітет</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Статус
-                                </th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Дата
-                                </th>
+                                <th>#</th>
+                                <th>Завдання</th>
+                                <th>Категорія</th>
+                                <th>Приорітет</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let task of tasks">
+                        <tbody style="font-size: 14px;">
+                            <tr *ngFor="let task of tasks; let i = index"
+                                [class.completed]="task.completed">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.category ? task.category.title : '' }}</td>
+                                <td>{{ task.priority ? task.priority.title : '' }}</td>
+                                <td>{{ task.date | date: 'dd MMM YY' }}</td>
                                 <td>
-                                    {{ task.id }}
-                                </td>
-                                <td>
-                                    {{ task.title }}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{ task.category }}
-                                </td>
-                                <td class="align-middle">
-                                    {{ task.priority }}
-                                </td>
-                                <td class="align-middle">
-                                    0
-                                </td>
-                                <td class="align-middle">
-                                    {{ task.date }}
+                                    <div class="form-check">
+                                        <input [checked]="task.completed"
+                                               (click)="toggleTaskCompleted(task)"
+                                               class="form-check-input" 
+                                               type="checkbox" 
+                                               value="" >
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,8 @@
+.completed {
+    text-decoration: line-through;
+    color: #797979;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked:after {
+    opacity: 0;
+}
