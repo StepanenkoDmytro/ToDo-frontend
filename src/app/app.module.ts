@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './views/categories/categories.component';
@@ -21,6 +26,10 @@ import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
