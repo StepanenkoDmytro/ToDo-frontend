@@ -3,7 +3,10 @@
   <app-header></app-header>
   <!-- End Navbar -->
   <div class="container-fluid py-4">
-    <app-stat></app-stat>
+    <app-stat [completeTasksInCategory]="completedCountInCategory"
+              [totalTasksInCategory]="totalTasksCountInCategory"
+              [uncompleteTasksInCategory]="uncompletedCountInCategory">
+    </app-stat>
 
     <app-tasks class="row mt-3"></app-tasks>
 

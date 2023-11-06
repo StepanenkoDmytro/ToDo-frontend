@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-stat',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./stat.component.css']
 })
 export class StatComponent {
+  @Input()
+  totalTasksInCategory: number; 
 
+  @Input()
+  completeTasksInCategory: number; 
+
+  @Input()
+  uncompleteTasksInCategory: number; 
 }

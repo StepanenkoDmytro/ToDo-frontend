@@ -1,0 +1,30 @@
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 35px;
+}
+
+.card-icon {
+
+    .material-icons {
+        font-size: 32px;
+    }
+}
+
+.stat-card-title {
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+.completed-card {
+    border: 3px solid #ff4c8e !important;
+}
+
+.card-footer {
+    padding: 1rem;
+}
