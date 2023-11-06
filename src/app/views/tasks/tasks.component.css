@@ -16,3 +16,32 @@
     background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
     color: #fff;
 }
+
+.col-color {
+    width: 1%;
+}
+
+.col-title {
+    width: 40%;
+}
+
+.col-id {
+    width: 4%;
+    text-align: center;
+}
+
+.col-priority {
+    width: 10%;
+}
+
+.col-category {
+    width: 10%;
+}
+
+.col-status {
+    width: 3%;
+}
+
+.col-date {
+    width: 10%;
+}
