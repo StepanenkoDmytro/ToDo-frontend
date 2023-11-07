@@ -44,8 +44,14 @@ export class TaskDAOImpl implements TaskDAO {
         throw new Error("Method not implemented.");
     }
 
-    public update(T: Task): Observable<Task> {
-        throw new Error("Method not implemented.");
+    public update(task: Task): Observable<Task> {
+        const taskTmp = TestData.tasks.find(t => t.id === task.id);
+
+        if (taskTmp) {
+            TestData.tasks.splice(TestData.tasks.indexOf(taskTmp!), 1, task);
+        }
+
+        return of(task);
     }
 
     public getAll(): Observable<Task[]> {
@@ -55,7 +61,7 @@ export class TaskDAOImpl implements TaskDAO {
     private searchTasks(category: Category, searchText: string, status: boolean, priority: Priority): Task[] {
         let allTasks = TestData.tasks;
 
-        if(category != null) {
+        if (category != null) {
             allTasks = allTasks.filter(todo => todo.category === category);
         }
 

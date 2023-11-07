@@ -6,6 +6,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +19,9 @@ import { FooterComponent } from './views/footer/footer.component';
 import { HeaderComponent } from './views/header/header.component';
 import { StatComponent } from './views/stat/stat.component';
 import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
+import { FormsModule } from '@angular/forms';
+import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +31,8 @@ import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
     FooterComponent,
     HeaderComponent,
     StatComponent,
-    StatCardComponent
+    StatCardComponent,
+    EditTaskDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +40,13 @@ import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
