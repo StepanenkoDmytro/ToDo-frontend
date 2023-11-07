@@ -1,4 +1,6 @@
-<app-categories class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main"></app-categories>
+<app-categories class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main"
+                [categories]="categories"
+                (selectCategory)="onSelectCategory($event)"></app-categories>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
   <app-header></app-header>
   <!-- End Navbar -->
@@ -8,7 +10,9 @@
               [uncompleteTasksInCategory]="uncompletedCountInCategory">
     </app-stat>
 
-    <app-tasks class="row mt-3"></app-tasks>
+    <app-tasks class="row mt-3" 
+               [tasks]="tasks"
+               (updateTask)="onUpdateTask($event)"></app-tasks>
 
     <app-footer></app-footer>
     

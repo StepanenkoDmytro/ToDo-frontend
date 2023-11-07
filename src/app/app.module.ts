@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './views/categories/categories.component';
@@ -30,6 +32,7 @@ import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
