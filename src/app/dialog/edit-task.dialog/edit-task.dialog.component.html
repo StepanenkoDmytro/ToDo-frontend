@@ -24,6 +24,26 @@
 
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Вкажіть категорію</mat-label>
+    <mat-select [(ngModel)]="tmpCategoty">
+        <mat-option [value]="null">Без категорії</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category.title }}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Вкажіть пріорітет</mat-label>
+    <mat-select [(ngModel)]="tmpPriority">
+        <mat-option [value]="null">Без пріорітету</mat-option>
+        <mat-option *ngFor="let priority of priorities" [value]="priority">
+            {{ priority.title }}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 <mat-dialog-actions>
 
 

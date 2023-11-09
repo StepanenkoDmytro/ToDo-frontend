@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 import { AppComponent } from './app.component';
@@ -45,8 +47,9 @@ import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dia
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    FormsModule
-
+    MatSelectModule,
+    
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
