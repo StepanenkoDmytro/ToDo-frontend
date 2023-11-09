@@ -23,6 +23,7 @@ import { StatComponent } from './views/stat/stat.component';
 import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
 import { FormsModule } from '@angular/forms';
 import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dialog.component';
+import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dia
     HeaderComponent,
     StatComponent,
     StatCardComponent,
-    EditTaskDialogComponent
+    EditTaskDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,8 @@
 
     <app-tasks class="row mt-3" 
                [tasks]="tasks"
-               (updateTask)="onUpdateTask($event)"></app-tasks>
+               (updateTask)="onUpdateTask($event)"
+               (deleteTask)="onDeleteTask($event)"></app-tasks>
 
     <app-footer></app-footer>
     

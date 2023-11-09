@@ -38,13 +38,37 @@ export class AppComponent implements OnInit {
   }
 
   public onUpdateTask(task: Task): void {
-    
+    const mockPriority = new Priority(12, "Lol", '');
+    this.dataHandlet.updateTask(task).subscribe(() => {
+      this.dataHandlet.searchTasks(
+        this.selectedCategory,
+        '',
+        false,
+        mockPriority
+      ).subscribe(task => {
+        this.tasks = task;
+      });
+    });
+  }
+
+  public onDeleteTask(task: Task): void {
+    const mockPriority = new Priority(12, "Lol", '');
+    this.dataHandlet.deleteTask(task.id).subscribe(() => {
+      this.dataHandlet.searchTasks(
+        this.selectedCategory,
+        '',
+        false,
+        mockPriority
+      ).subscribe(task => {
+        this.tasks = task;
+      });
+    });
   }
 
 
   public onSelectCategory(category: Category) {
     this.selectedCategory = category;
-    const mockPriority = new Priority(12,"Lol",'');
+    const mockPriority = new Priority(12, "Lol", '');
 
     this.dataHandlet.searchTasks(
       this.selectedCategory,

@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/model/Category';
 import { Priority } from 'src/app/model/Priority';
 import { Task } from 'src/app/model/Task';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
+import { ConfirmDialogComponent } from '../confirm.dialog/confirm.dialog.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class EditTaskDialogComponent implements OnInit {
   public priorities: Priority[];
 
   public dialogTitle: string;
-  private task: Task;
+  public task: Task;
 
   public tmpTitle: string;
   public tmpCategoty: Category;
@@ -27,9 +28,9 @@ export class EditTaskDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     private data: [Task, string],
-    private dataHandler: DataHandlerService
-  ) {
-  }
+    private dataHandler: DataHandlerService,
+    private dialog: MatDialog
+  ) { }
 
   public ngOnInit(): void {
     this.task = this.data[0];
@@ -61,5 +62,30 @@ export class EditTaskDialogComponent implements OnInit {
 
   public onCancel(): void {
     this.dialogRef.close(null);
+  }
+
+  public detele(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '500px',
+      data: {
+        dialogTitle: 'Підтвердіть дію',
+        message: `Ви дійсно хочете видалити задачу: ${this.task.title}?`
+      },
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.dialogRef.close('delete');
+      }
+    })
+  }
+
+  public activate(): void {
+    this.dialogRef.close('activate');
+  }
+
+  public complete(): void {
+    this.dialogRef.close('complete');
   }
 }

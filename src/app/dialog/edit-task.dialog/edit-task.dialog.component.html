@@ -7,18 +7,12 @@
       <input
           #inputTitle
           (keydown.enter)="onConfirm()"
-
           [(ngModel)]="tmpTitle"
-
           matInput> 
 
-      <button
-              (click)="tmpTitle= ''"
-
+      <button (click)="tmpTitle= ''"
               *ngIf="tmpTitle.trim().length > 0" aria-label="Clear" class="size25" mat-button
-
-              mat-icon-button matSuffix>
-
+               matSuffix>
           <mat-icon>clear</mat-icon>
       </button>
 
@@ -27,7 +21,9 @@
   <mat-form-field>
     <mat-label>Вкажіть категорію</mat-label>
     <mat-select [(ngModel)]="tmpCategoty">
-        <mat-option [value]="null">Без категорії</mat-option>
+        <mat-option [value]="null">
+          Без категорії
+        </mat-option>
         <mat-option *ngFor="let category of categories" [value]="category">
             {{ category.title }}
         </mat-option>
@@ -37,8 +33,11 @@
   <mat-form-field>
     <mat-label>Вкажіть пріорітет</mat-label>
     <mat-select [(ngModel)]="tmpPriority">
-        <mat-option [value]="null">Без пріорітету</mat-option>
-        <mat-option *ngFor="let priority of priorities" [value]="priority">
+        <mat-option [value]="null">
+          Без пріорітету
+        </mat-option>
+        <mat-option *ngFor="let priority of priorities" 
+                    [value]="priority">
             {{ priority.title }}
         </mat-option>
     </mat-select>
@@ -46,18 +45,44 @@
 
 <mat-dialog-actions>
 
-
   <div class="col-md-5 col-12">
 
-      <button
-              (click)="onConfirm()" [disabled]="inputTitle.value.trim().length==0"
-              color="primary"
-              mat-raised-button>  
-          Сохранить
-      </button>
+    <button (click)="onConfirm()" 
+            [disabled]="inputTitle.value.trim().length==0"
+            color="primary"
+            mat-raised-button>  
+      Сохранить
+    </button>
 
 
-      <button (click)="onCancel()" mat-raised-button>Отмена</button>
+    <button (click)="onCancel()" 
+            mat-raised-button>
+      Отмена
+    </button>
+
+  </div>
+
+  <div class="col-md-7 col-12 text-right">
+
+    <button *ngIf="!task.completed"
+            class="green"
+            mat-button
+            (click)="complete()">
+      Завершити задачу
+    </button>
+
+    <button *ngIf="task.completed"
+            class="green"
+            mat-button
+            (click)="activate()">
+      Активувати задачу
+    </button>
+
+    <button mat-button
+            class="red"
+            (click)="detele()">
+      Видалити задачу
+    </button>
 
   </div>
 

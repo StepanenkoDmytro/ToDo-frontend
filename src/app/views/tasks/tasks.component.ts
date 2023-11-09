@@ -34,6 +34,8 @@ export class TasksComponent implements OnInit {
 
   @Output()
   public updateTask = new EventEmitter<Task>();
+  @Output()
+  public deleteTask = new EventEmitter<Task>();
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -99,9 +101,29 @@ export class TasksComponent implements OnInit {
 
 
   public openEditTaskDialog(task: Task): void {
-    const dialogRef = this.dialog.open(EditTaskDialogComponent, {data: [task, task.title], autoFocus: false});
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+      data: [task, task.title], 
+      autoFocus: false
+    });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result === 'complete') {
+        task.completed = true;
+        this.updateTask.emit(task);
+        return;
+      }
+
+      if(result === 'activate') {
+        task.completed = false;
+        this.updateTask.emit(task);
+        return;
+      }
+
+      if(result === 'delete') {
+        this.deleteTask.emit(task);
+        return;
+      }
+
       if(result as Task) {
         this.updateTask.emit(task);
         return;
