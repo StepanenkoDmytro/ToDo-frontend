@@ -1,7 +1,6 @@
 <div mat-dialog-content>
   <p mat-dialog-title style="margin-bottom: 25px;">{{dialogTitle}}</p>
 
-  <div>
   <mat-form-field appearance="outline" class="w-100">
 
     <mat-label>Назва (обовʼязково)</mat-label>
@@ -13,9 +12,7 @@
     </button>
 
   </mat-form-field>
-</div>
 
-  <div>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Вкажіть категорію</mat-label>
       <mat-select [(ngModel)]="tmpCategoty">
@@ -27,9 +24,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
 
-  <div>
   <mat-form-field appearance="outline" class="w-100">
     <mat-label>Вкажіть пріорітет</mat-label>
     <mat-select [(ngModel)]="tmpPriority">
@@ -41,25 +36,31 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-</div>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <input matInput 
+           placeholder="Вкажіть термін виконання" 
+           readonly="true" 
+           #inputDate 
+           [matDatepicker]="picker"
+           [(ngModel)]="tmpDate"
+           (click)="picker.open()">
+
+
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <button *ngIf="inputDate.value.trim().length > 0"
+            class="size25"
+            mat-button 
+            matSuffix 
+            area-label="Clear"
+            (click)="task.date && tmpDate = task.date">
+            <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
 
   <mat-dialog-actions>
-    <div class="col-md-12 col-12 text-right action-buttons">
-
-      <button *ngIf="!task.completed" color="green" mat-button (click)="complete()">
-        Завершити
-      </button>
-
-      <button *ngIf="task.completed" color="green" mat-button (click)="activate()">
-        Активувати
-      </button>
-
-      <button mat-button color="warn" (click)="detele()">
-        Видалити
-      </button>
-    </div>
-
-    <div class="col-md-12 col-12 action-buttons mt-3">
+    <div class="col-md-5 col-12">
 
       <button mat-raised-button color="primary" 
               (click)="onConfirm()" 
@@ -72,6 +73,21 @@
         Відміна
       </button>
 
+    </div>
+
+    <div class="col-md-7 col-12 text-right">
+
+      <button *ngIf="!task.completed" color="green" mat-button (click)="complete()">
+        Завершити задачу
+      </button>
+
+      <button *ngIf="task.completed" color="green" mat-button (click)="activate()">
+        Активувати
+      </button>
+
+      <button mat-button color="warn" (click)="detele()">
+        Видалити задачу
+      </button>
     </div>
 
   </mat-dialog-actions>

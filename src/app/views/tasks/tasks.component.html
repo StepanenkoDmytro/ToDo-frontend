@@ -40,7 +40,7 @@
                     *matCellDef="let task" 
                     class="col-date"
                     [class.no-value]="!task.date">
-                    {{ task.date ? (task.date | date: 'dd MMM YY') : 'Немає дати' }}
+                    {{ task.date | taskDate }}
                 </td>
             </ng-container>
             

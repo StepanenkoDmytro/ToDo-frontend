@@ -11,8 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
-
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeUk from '@angular/common/locales/uk';
 
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './views/categories/categories.component';
@@ -24,7 +28,10 @@ import { StatCardComponent } from './views/stat/stat-card/stat-card.component';
 import { FormsModule } from '@angular/forms';
 import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.component';
+import { TaskDatePipe } from './pipe/task-date.pipe';
 
+
+registerLocaleData(localeUk, 'uk-UA');
 
 @NgModule({
   declarations: [
@@ -36,7 +43,8 @@ import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.c
     StatComponent,
     StatCardComponent,
     EditTaskDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TaskDatePipe
   ],
   imports: [
     BrowserModule,
@@ -50,10 +58,13 @@ import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.c
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'uk-UA' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

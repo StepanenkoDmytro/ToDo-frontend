@@ -23,6 +23,7 @@ export class EditTaskDialogComponent implements OnInit {
   public tmpTitle: string;
   public tmpCategoty: Category;
   public tmpPriority: Priority;
+  public tmpDate: Date;
 
   constructor(
     private dialogRef: MatDialogRef<EditTaskDialogComponent>,
@@ -55,6 +56,7 @@ export class EditTaskDialogComponent implements OnInit {
     this.task.title = this.tmpTitle;
     this.task.category = this.tmpCategoty;
     this.task.priority = this.tmpPriority;
+    this.task.date = this.tmpDate;
 
     this.dialogRef.close(this.task);
 
