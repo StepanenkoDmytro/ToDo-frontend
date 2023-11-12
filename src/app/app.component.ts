@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   public tasks: Task[];
   public categories: Category[];
 
-  public selectedCategory: Category;
+  public selectedCategory: Category | null;
 
   constructor(
-    private dataHandlet: DataHandlerService
+    private dataHandler: DataHandlerService
   ) { }
 
   totalTasksCountInCategory: number;
@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
   uncompletedTotalTasksCount: number;
 
   ngOnInit(): void {
-    this.dataHandlet.getAllTasks().subscribe(tasks => this.tasks = tasks);
-    this.dataHandlet.getAllCategories().subscribe(categories => this.categories = categories);
+    this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
+    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
 
     // this.onSelectCategory(null);
 
@@ -39,8 +39,8 @@ export class AppComponent implements OnInit {
 
   public onUpdateTask(task: Task): void {
     const mockPriority = new Priority(12, "Lol", '');
-    this.dataHandlet.updateTask(task).subscribe(() => {
-      this.dataHandlet.searchTasks(
+    this.dataHandler.updateTask(task).subscribe(() => {
+      this.dataHandler.searchTasks(
         this.selectedCategory,
         '',
         false,
@@ -53,8 +53,8 @@ export class AppComponent implements OnInit {
 
   public onDeleteTask(task: Task): void {
     const mockPriority = new Priority(12, "Lol", '');
-    this.dataHandlet.deleteTask(task.id).subscribe(() => {
-      this.dataHandlet.searchTasks(
+    this.dataHandler.deleteTask(task.id).subscribe(() => {
+      this.dataHandler.searchTasks(
         this.selectedCategory,
         '',
         false,
@@ -66,17 +66,30 @@ export class AppComponent implements OnInit {
   }
 
 
-  public onSelectCategory(category: Category) {
+  public onSelectCategory(category: Category | null) {
     this.selectedCategory = category;
     const mockPriority = new Priority(12, "Lol", '');
 
-    this.dataHandlet.searchTasks(
+    this.dataHandler.searchTasks(
       this.selectedCategory,
       '',
       false,
       mockPriority
     ).subscribe((tasks: Task[]) => {
       this.tasks = tasks;
+    })
+  }
+
+  public onDeleteCategory(category: Category): void {
+    this.dataHandler.deleteCategory(category.id).subscribe( () => {
+      this.selectedCategory = null;
+      this.onSelectCategory(this.selectedCategory);
+    })
+  }
+
+  public onUpdateCategory(category: Category): void {
+    this.dataHandler.updateCategory(category).subscribe( () => {
+      this.onSelectCategory(this.selectedCategory);
     })
   }
 }

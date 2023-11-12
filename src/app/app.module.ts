@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.component';
 import { TaskDatePipe } from './pipe/task-date.pipe';
+import { EditCategoryDialogComponent } from './dialog/edit-category-dialog/edit-category-dialog.component';
 
 
 registerLocaleData(localeUk, 'uk-UA');
@@ -45,7 +46,8 @@ registerLocaleData(localeUk, 'uk-UA');
     StatCardComponent,
     EditTaskDialogComponent,
     ConfirmDialogComponent,
-    TaskDatePipe
+    TaskDatePipe,
+    EditCategoryDialogComponent
   ],
   imports: [
     BrowserModule,

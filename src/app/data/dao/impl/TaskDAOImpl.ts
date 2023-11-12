@@ -7,7 +7,7 @@ import { TestData } from "../../TestData";
 
 export class TaskDAOImpl implements TaskDAO {
 
-    public search(category: Category, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
+    public search(category: Category | null, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
         return of(this.searchTasks(category, searchText, status, priority));
     }
 
@@ -64,7 +64,7 @@ export class TaskDAOImpl implements TaskDAO {
         return of(TestData.tasks);
     }
 
-    private searchTasks(category: Category, searchText: string, status: boolean, priority: Priority): Task[] {
+    private searchTasks(category: Category | null, searchText: string, status: boolean, priority: Priority): Task[] {
         let allTasks = TestData.tasks;
 
         if (category != null) {
