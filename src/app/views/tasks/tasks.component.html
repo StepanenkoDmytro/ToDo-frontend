@@ -43,16 +43,6 @@
                     {{ task.date | taskDate }}
                 </td>
             </ng-container>
-            
-            <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Категорія</th>
-                <td mat-cell 
-                    *matCellDef="let task" 
-                    class="col-category"
-                    [class.no-value]="!task.category">
-                {{ task.category ? task.category.title : 'Немає категорії' }}
-                </td>
-            </ng-container>
 
             <ng-container matColumnDef="priority">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Приорітет</th>
@@ -63,19 +53,47 @@
                     {{ task.priority ? task.priority.title : 'Немає пріорітету' }}
                 </td>
             </ng-container>
+            
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Категорія</th>
+                <td mat-cell 
+                    *matCellDef="let task" 
+                    class="col-category"
+                    [ngClass]="{'completed': task.completed, 'no-value': task.category == null, 'link': !task.completed}"
+                    (click)="(!task.completed && task.category && onSelectCategory(task.category))">
+
+                    {{ task.category ? task.category.title : 'Немає категорії' }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="operation">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell 
+                    *matCellDef="let task"
+                    [class.completed]="task.completed"
+                    class="col-operations">
+                    
+                    <button (click)="openDeleteDialog(task)"
+                            class="icon delete-icon">
+                        <mat-icon aria-hidden="false">delete</mat-icon>
+                    </button>
+
+                    <button (click)="openEditTaskDialog(task)"
+                                    class="icon edit-icon">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
 
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Статус</th>
+                <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell 
                     *matCellDef="let task"
                     class="col-status">
-                    <div class="form-check">
-                        <input [checked]="task.completed"
-                                (click)="toggleTaskCompleted(task)"
-                                class="form-check-input" 
-                                type="checkbox" 
-                                value="" >
-                    </div>
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? onToogleStatus(task) : null"
+                                  [checked]="task.completed">
+                    </mat-checkbox>
                 </td>
             </ng-container>
             

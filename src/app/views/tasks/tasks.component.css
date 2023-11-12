@@ -43,5 +43,31 @@
 }
 
 .col-date {
-    width: 10%;
+    width: 11%;
+}
+
+.col-operations {
+    width: 9%;
+} 
+
+.icon {
+    font-size: 18px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: none;
+    background: inherit;
+}
+
+.delete-icon {
+    color: #ea6561;   
+}
+
+.edit-icon {
+    color: #9A9A9A;
+}
+
+.mat-mdc-header-row  {
+    font-size: 1.063rem;
+    color: #9c27b0 !important;
+    font-weight: normal;
 }

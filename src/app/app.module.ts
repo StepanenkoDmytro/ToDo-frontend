@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
@@ -60,6 +61,7 @@ registerLocaleData(localeUk, 'uk-UA');
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
     FormsModule,
   ],
   providers: [
