@@ -27,8 +27,12 @@ export class TaskDAOImpl implements TaskDAO {
         throw new Error("Method not implemented.");
     }
 
-    public add(T: Task): Observable<Task> {
-        throw new Error("Method not implemented.");
+    public add(task: Task): Observable<Task> {
+        if(task.id === null || task.id === 0) {
+            task.id = this.getLastIdTask();
+        }
+        TestData.tasks.push(task);
+        return of(task);
     }
 
     public get(id: number): Observable<Task> {
@@ -88,4 +92,7 @@ export class TaskDAOImpl implements TaskDAO {
         return allTasks;
     }
 
+    private getLastIdTask(): number {
+        return Math.max.apply(Math, TestData.tasks.map(task => task.id!)) + 1;
+    }
 }

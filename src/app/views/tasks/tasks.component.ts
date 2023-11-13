@@ -42,6 +42,8 @@ export class TasksComponent implements OnInit {
   public set setPriorities(priorities: Priority[]) {
     this.priorities = priorities;
   }
+  @Input()
+  public selectedCategory: Category | null;
 
   @Output()
   public updateTask = new EventEmitter<Task>();
@@ -55,6 +57,8 @@ export class TasksComponent implements OnInit {
   public filterByStatus = new EventEmitter<boolean | null>();
   @Output()
   public filterByPriority = new EventEmitter<Priority | null>();
+  @Output()
+  public addTask = new EventEmitter<Task>();
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -148,7 +152,7 @@ export class TasksComponent implements OnInit {
         this.updateTask.emit(task);
         return;
       }
-    })
+    });
   }
 
   public openDeleteDialog(task: Task): void {
@@ -164,6 +168,20 @@ export class TasksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteTask.emit(task);
+      }
+    });
+  }
+
+  public openAddTaskDialog(): void {
+    const task = new Task(null, '', false, null, this.selectedCategory)
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, {
+      data: [task, 'Додавання задачі'],
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.addTask.emit(task);
       }
     });
   }
@@ -184,7 +202,7 @@ export class TasksComponent implements OnInit {
   }
 
   public onFilterByPriority(priority: Priority | null): void {
-    if(priority !== this.selectedPriorityFilter) {
+    if (priority !== this.selectedPriorityFilter) {
       this.selectedPriorityFilter = priority;
       this.filterByPriority.emit(this.selectedPriorityFilter);
     }

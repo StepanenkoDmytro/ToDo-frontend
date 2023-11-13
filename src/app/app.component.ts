@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    // this.dataHandler.getAllTasks().subscribe(tasks => this.tasks = tasks);
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities)
     this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
 
@@ -33,38 +32,29 @@ export class AppComponent implements OnInit {
   }
 
   public onUpdateTask(task: Task): void {
-    const mockPriority = new Priority(12, "Lol", '');
     this.dataHandler.updateTask(task).subscribe(() => {
-      this.dataHandler.searchTasks(
-        this.selectedCategory,
-        '',
-        false,
-        mockPriority
-      ).subscribe(task => {
-        this.tasks = task;
-      });
+      this.updateTasks();
     });
   }
 
   public onDeleteTask(task: Task): void {
-    const mockPriority = new Priority(12, "Lol", '');
-    this.dataHandler.deleteTask(task.id).subscribe(() => {
-      this.dataHandler.searchTasks(
-        this.selectedCategory,
-        '',
-        false,
-        mockPriority
-      ).subscribe(task => {
-        this.tasks = task;
+    if (task.id) {
+      this.dataHandler.deleteTask(task.id).subscribe(() => {
+        this.updateTasks();
       });
-    });
+    }
   }
 
+  public onAddTask(task: Task): void {
+    this.dataHandler.addTask(task).subscribe(result => {
+      this.updateTasks()
+    })
+  }
 
   public onSelectCategory(category: Category | null) {
     this.selectedCategory = category;
 
-    this.updateTask();
+    this.updateTasks();
   }
 
   public onDeleteCategory(category: Category): void {
@@ -82,20 +72,20 @@ export class AppComponent implements OnInit {
 
   public onFilterTaskByTitle(search: string): void {
     this.searchText = search;
-    this.updateTask();
+    this.updateTasks();
   }
 
   public onFilterTaskByStatus(status: boolean | null): void {
     this.statusFilter = status;
-    this.updateTask();
+    this.updateTasks();
   }
 
   public onFilterTaskByPriority(priority: Priority | null): void {
-   this.priorityFilter = priority;
-   this.updateTask();
+    this.priorityFilter = priority;
+    this.updateTasks();
   }
 
-  private updateTask(): void {
+  private updateTasks(): void {
     this.dataHandler.searchTasks(
       this.selectedCategory,
       this.searchText,

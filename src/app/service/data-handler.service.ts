@@ -31,6 +31,10 @@ export class DataHandlerService {
     return this.priorityDAO.getAll();
   }
 
+  public addTask(task: Task): Observable<Task> {
+    return this.taskDAO.add(task);
+  }
+
   public updateTask(task: Task): Observable<Task> {
     return this.taskDAO.update(task);
   }

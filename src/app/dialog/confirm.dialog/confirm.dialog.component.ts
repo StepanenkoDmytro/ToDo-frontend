@@ -22,11 +22,11 @@ export class ConfirmDialogComponent {
   }
 
   public onCancel(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close(false);
   }
 
   public onConfirm(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(true);
   }
 
 }

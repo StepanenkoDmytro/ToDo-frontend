@@ -92,8 +92,10 @@
                                (filterByStatus)="onFilterTaskByStatus($event)"
                                (filterByTitle)="onFilterTaskByTitle($event)"
                                (filterByPriority)="onFilterTaskByPriority($event)"
+                               (addTask)="onAddTask($event)"
                                [tasks]="tasks"
-                               [priorities]="priorities">
+                               [priorities]="priorities"
+                               [selectedCategory]="selectedCategory">
                     </app-tasks>
                   </div>
               </div>
