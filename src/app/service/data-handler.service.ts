@@ -47,6 +47,10 @@ export class DataHandlerService {
     return this.taskDAO.search(category, searchText, status, priority);
   }
 
+  public addCategory(category: string): Observable<Category> {
+    return this.categoryDAO.add(new Category(null, category));
+  }
+
   public deleteCategory(categoryID: number): Observable<Category> {
     return this.categoryDAO.delete(categoryID);
   }

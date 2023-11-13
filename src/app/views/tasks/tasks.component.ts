@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { OperType } from 'src/app/dialog/OperType';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm.dialog/confirm.dialog.component';
 import { EditTaskDialogComponent } from 'src/app/dialog/edit-task.dialog/edit-task.dialog.component';
 import { Category } from 'src/app/model/Category';
@@ -104,7 +105,7 @@ export class TasksComponent implements OnInit {
         }
 
         case 'category': {
-          return task.category ? task.category.id.toString() : '';
+          return task.category && task.category.id ? task.category.id.toString() : '';
         }
 
         case 'date': {
@@ -126,7 +127,7 @@ export class TasksComponent implements OnInit {
 
   public openEditTaskDialog(task: Task): void {
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-      data: [task, task.title],
+      data: [task, task.title, OperType.EDIT],
       autoFocus: false
     });
 
@@ -175,12 +176,12 @@ export class TasksComponent implements OnInit {
   public openAddTaskDialog(): void {
     const task = new Task(null, '', false, null, this.selectedCategory)
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-      data: [task, 'Додавання задачі'],
+      data: [task, 'Додавання задачі', OperType.ADD],
       autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.addTask.emit(task);
       }
     });

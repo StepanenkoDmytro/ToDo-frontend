@@ -5,23 +5,20 @@
       </span>
 
       <span class="add-icon-area">
-        <button mat-icon-button class="add-icon">
+        <button mat-icon-button 
+                class="add-icon"
+                (click)="openAddDialog()">
             <mat-icon>add</mat-icon>
         </button>
       </span>
   </div>
   <div class="sidebar-wrapper">
       <ul class="nav">
-
           <li class="nav-item category" (click)="showTasksByCategory(null)"
               [class.active]="selectedCategory === null">
-
-              <a class="nav-link pointer">
-
-                  <span class="all-category-title">Всі</span>
-
-
-              </a>
+                <a class="nav-link pointer">
+                    <span class="all-category-title">Всі</span>
+                </a>
           </li>
 
           <div class="line"></div>
@@ -30,7 +27,7 @@
               (click)="showTasksByCategory(category)"
               (mouseleave)="showEditIcon(null)"
               (mouseenter)="showEditIcon(index)"
-            class="nav-item pointer">
+              class="nav-item pointer">
               <a class="nav-link">
 
                 <span class="category-title">{{category.title}}</span>

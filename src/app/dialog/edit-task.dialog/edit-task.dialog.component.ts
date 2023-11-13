@@ -5,6 +5,7 @@ import { Priority } from 'src/app/model/Priority';
 import { Task } from 'src/app/model/Task';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
 import { ConfirmDialogComponent } from '../confirm.dialog/confirm.dialog.component';
+import { OperType } from '../OperType';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class EditTaskDialogComponent implements OnInit {
   public priorities: Priority[];
 
   public dialogTitle: string;
+  public operType: OperType;
   public task: Task;
 
   public tmpTitle: string;
@@ -28,7 +30,7 @@ export class EditTaskDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<EditTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    private data: [Task, string],
+    private data: [Task, string, OperType],
     private dataHandler: DataHandlerService,
     private dialog: MatDialog
   ) { }
@@ -36,6 +38,7 @@ export class EditTaskDialogComponent implements OnInit {
   public ngOnInit(): void {
     this.task = this.data[0];
     this.dialogTitle = this.data[1];
+    this.operType = this.data[2];
 
     this.tmpTitle = this.task.title;
 
@@ -89,5 +92,13 @@ export class EditTaskDialogComponent implements OnInit {
 
   public complete(): void {
     this.dialogRef.close('complete');
+  }
+
+  public canDelete(): boolean {
+    return this.operType === OperType.EDIT;
+  }
+
+  public canActivateDesactivate(): boolean {
+    return this.operType === OperType.EDIT;
   }
 }

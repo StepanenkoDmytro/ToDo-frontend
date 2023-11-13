@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { OperType } from 'src/app/dialog/OperType';
 import { EditCategoryDialogComponent } from 'src/app/dialog/edit-category-dialog/edit-category-dialog.component';
 import { Category } from 'src/app/model/Category';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
@@ -10,6 +11,7 @@ import { DataHandlerService } from 'src/app/service/data-handler.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
+
   public indexMouseMove: number | null;
 
   @Input()
@@ -23,6 +25,8 @@ export class CategoriesComponent {
   public deleteCategory = new EventEmitter<Category>();
   @Output()
   public updateCategory = new EventEmitter<Category>();
+  @Output()
+  public addCategory = new EventEmitter<string>();
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -46,7 +50,7 @@ export class CategoriesComponent {
 
   public openEditDialog(category: Category) {
     const dialogRef = this.dialog.open(EditCategoryDialogComponent, {
-      data: [category.title, 'Редагування категорії'],
+      data: [category.title, 'Редагування категорії', OperType.EDIT],
       width: '400px'
     });
 
@@ -61,6 +65,19 @@ export class CategoriesComponent {
 
         this.updateCategory.emit(category);
         return;
+      }
+    })
+  }
+
+  public openAddDialog(): void {
+    const dialogRef = this.dialog.open(EditCategoryDialogComponent, {
+      data: ['', 'Додавання категорії', OperType.ADD],
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result as string) {
+        this.addCategory.emit(result);
       }
     })
   }
