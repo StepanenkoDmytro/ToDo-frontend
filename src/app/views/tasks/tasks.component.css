@@ -22,16 +22,16 @@
 }
 
 .col-title {
-    width: 40%;
+    width: 39%;
 }
 
 .col-id {
-    width: 4%;
+    width: 3%;
     text-align: center;
 }
 
 .col-priority {
-    width: 10%;
+    width: 5%;
 }
 
 .col-category {
@@ -39,15 +39,16 @@
 }
 
 .col-status {
-    width: 3%;
+    width: 2%;
 }
 
 .col-date {
-    width: 11%;
+    width: 20%;
+    font-size: 13px;
 }
 
 .col-operations {
-    width: 9%;
+    width: 19%;
 } 
 
 .icon {
@@ -70,4 +71,8 @@
     font-size: 1.063rem;
     color: #9c27b0 !important;
     font-weight: normal;
+}
+
+.gray {
+    color: #8f8f8f;
 }

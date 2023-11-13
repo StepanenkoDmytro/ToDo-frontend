@@ -7,7 +7,7 @@ import { TestData } from "../../TestData";
 
 export class TaskDAOImpl implements TaskDAO {
 
-    public search(category: Category | null, searchText: string, status: boolean, priority: Priority): Observable<Task[]> {
+    public search(category: Category | null, searchText: string, status: boolean | null, priority: Priority | null): Observable<Task[]> {
         return of(this.searchTasks(category, searchText, status, priority));
     }
 
@@ -64,11 +64,25 @@ export class TaskDAOImpl implements TaskDAO {
         return of(TestData.tasks);
     }
 
-    private searchTasks(category: Category | null, searchText: string, status: boolean, priority: Priority): Task[] {
+    private searchTasks(category: Category | null, searchText: string, status: boolean | null, priority: Priority | null): Task[] {
         let allTasks = TestData.tasks;
+
+        if(status != null) {
+            allTasks = allTasks.filter(todo => todo.completed === status);
+        }
 
         if (category != null) {
             allTasks = allTasks.filter(todo => todo.category === category);
+        }
+
+        if(priority != null) {
+            allTasks = allTasks.filter(todo => todo.priority === priority);
+        }
+        
+        if(searchText) {
+            allTasks = allTasks.filter(todo => {
+                return todo.title.toUpperCase().includes(searchText.toUpperCase())
+            });
         }
 
         return allTasks;
