@@ -11,24 +11,24 @@ export class TaskDAOImpl implements TaskDAO {
         return of(this.searchTasks(category, searchText, status, priority));
     }
 
-    public getCompletedCountInCategory(category: Category): Observable<number> {
-        throw new Error("Method not implemented.");
+    public getCompletedCountInCategory(category: Category | null): Observable<number> {
+        return of(this.searchTasks(category, '', true, null).length);
     }
 
-    public getUncompletedCountInCategory(category: Category): Observable<number> {
-        throw new Error("Method not implemented.");
+    public getUncompletedCountInCategory(category: Category | null): Observable<number> {
+        return of(this.searchTasks(category, '', false, null).length);
     }
 
-    public getTotalCountInCategory(category: Category): Observable<number> {
-        throw new Error("Method not implemented.");
+    public getTotalCountInCategory(category: Category | null): Observable<number> {
+        return of(this.searchTasks(category, '', null, null).length);
     }
 
     public getTotalCount(): Observable<number> {
-        throw new Error("Method not implemented.");
+        return of(TestData.tasks.length);
     }
 
     public add(task: Task): Observable<Task> {
-        if(task.id === null || task.id === 0) {
+        if (task.id === null || task.id === 0) {
             task.id = this.getLastIdTask();
         }
         TestData.tasks.push(task);
@@ -46,7 +46,7 @@ export class TaskDAOImpl implements TaskDAO {
 
     public delete(id: number): Observable<Task> {
         const taskTmp = TestData.tasks.find(t => t.id === id);
-        if(taskTmp) {
+        if (taskTmp) {
             TestData.tasks.splice(TestData.tasks.indexOf(taskTmp), 1);
             return of(taskTmp);
         } else {
@@ -71,7 +71,7 @@ export class TaskDAOImpl implements TaskDAO {
     private searchTasks(category: Category | null, searchText: string, status: boolean | null, priority: Priority | null): Task[] {
         let allTasks = TestData.tasks;
 
-        if(status != null) {
+        if (status != null) {
             allTasks = allTasks.filter(todo => todo.completed === status);
         }
 
@@ -79,11 +79,11 @@ export class TaskDAOImpl implements TaskDAO {
             allTasks = allTasks.filter(todo => todo.category === category);
         }
 
-        if(priority != null) {
+        if (priority != null) {
             allTasks = allTasks.filter(todo => todo.priority === priority);
         }
-        
-        if(searchText) {
+
+        if (searchText) {
             allTasks = allTasks.filter(todo => {
                 return todo.title.toUpperCase().includes(searchText.toUpperCase())
             });
