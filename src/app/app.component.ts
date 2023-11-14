@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   private searchText: string;
   private statusFilter: boolean | null;
   private priorityFilter: Priority | null;
+  private searchCategoryText : string;
 
   constructor(
     private dataHandler: DataHandlerService
@@ -66,15 +67,14 @@ export class AppComponent implements OnInit {
   public onDeleteCategory(category: Category): void {
     if (category.id) {
       this.dataHandler.deleteCategory(category.id).subscribe(() => {
-        this.selectedCategory = null;
-        this.onSelectCategory(this.selectedCategory);
+        this.onSelectCategory(null);
       })
     }
   }
 
   public onUpdateCategory(category: Category): void {
     this.dataHandler.updateCategory(category).subscribe(() => {
-      this.onSelectCategory(this.selectedCategory);
+      this.onSearchCategory(this.searchCategoryText);
     })
   }
 
@@ -93,13 +93,22 @@ export class AppComponent implements OnInit {
     this.updateTasks();
   }
 
+  public onSearchCategory(search: string): void {
+    this.searchCategoryText = search;
+    console.log(search);
+    
+    this.dataHandler.searchCategories(search).subscribe(categories => this.categories = categories);
+  }
+
   private updateTasks(): void {
+    
     this.dataHandler.searchTasks(
       this.selectedCategory,
       this.searchText,
       this.statusFilter,
       this.priorityFilter
     ).subscribe((tasks: Task[]) => {
+      console.log(tasks);
       this.tasks = tasks;
     })
   }

@@ -51,7 +51,7 @@ export class TasksComponent implements OnInit {
   @Output()
   public deleteTask = new EventEmitter<Task>();
   @Output()
-  public selectCategory = new EventEmitter<Category>();
+  public selectCategory = new EventEmitter<Category | null>();
   @Output()
   public filterByTitle = new EventEmitter<string>();
   @Output()
@@ -68,7 +68,9 @@ export class TasksComponent implements OnInit {
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
+
     this.fillTable();
+    this.onSelectCategory(null);
   }
 
   public onToogleStatus(task: Task): void {
@@ -187,8 +189,8 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  public onSelectCategory(category: Category) {
-    this.selectCategory.emit(category)
+  public onSelectCategory(category: Category | null) {
+    this.selectCategory.emit(category);
   }
 
   public onFilterByStatus(value: boolean | null): void {

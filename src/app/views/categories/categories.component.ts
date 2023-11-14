@@ -12,6 +12,7 @@ import { DataHandlerService } from 'src/app/service/data-handler.service';
 })
 export class CategoriesComponent {
 
+  public searchCategoryTitle: string;
   public indexMouseMove: number | null;
 
   @Input()
@@ -27,6 +28,8 @@ export class CategoriesComponent {
   public updateCategory = new EventEmitter<Category>();
   @Output()
   public addCategory = new EventEmitter<string>();
+  @Output()
+  public searchCategory = new EventEmitter<string>();
 
   constructor(
     private dataHandler: DataHandlerService,
@@ -60,7 +63,7 @@ export class CategoriesComponent {
         return;
       }
 
-      if(result as string) {
+      if (result as string) {
         category.title = result;
 
         this.updateCategory.emit(category);
@@ -76,9 +79,16 @@ export class CategoriesComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result as string) {
+      if (result as string) {
         this.addCategory.emit(result);
       }
     })
+  }
+
+  public search(): void {
+    if (this.searchCategoryTitle === null) {
+      return;
+    }
+    this.searchCategory.emit(this.searchCategoryTitle);
   }
 }

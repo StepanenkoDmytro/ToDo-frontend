@@ -58,4 +58,8 @@ export class DataHandlerService {
   public updateCategory(category: Category): Observable<Category> {
     return this.categoryDAO.update(category);
   }
+
+  public searchCategories(search: string): Observable<Category[]> {
+    return this.categoryDAO.search(search);
+  }
 }
