@@ -146,5 +146,4 @@ export class AppComponent implements OnInit {
   public toggleStat(stat: boolean): void {
     this.showStat = stat;
   }
-
 }

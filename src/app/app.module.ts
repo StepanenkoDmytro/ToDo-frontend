@@ -31,6 +31,9 @@ import { EditTaskDialogComponent } from './dialog/edit-task.dialog/edit-task.dia
 import { ConfirmDialogComponent } from './dialog/confirm.dialog/confirm.dialog.component';
 import { TaskDatePipe } from './pipe/task-date.pipe';
 import { EditCategoryDialogComponent } from './dialog/edit-category-dialog/edit-category-dialog.component';
+import { PrioritiesComponent } from './views/priorities/priorities.component';
+import { SettingsDialogComponent } from './dialog/settings.dialog/settings.dialog.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 registerLocaleData(localeUk, 'uk-UA');
@@ -47,7 +50,9 @@ registerLocaleData(localeUk, 'uk-UA');
     EditTaskDialogComponent,
     ConfirmDialogComponent,
     TaskDatePipe,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    PrioritiesComponent,
+    SettingsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +70,7 @@ registerLocaleData(localeUk, 'uk-UA');
     MatNativeDateModule,
     MatCheckboxModule,
     FormsModule,
+    ColorPickerModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'uk-UA' }
