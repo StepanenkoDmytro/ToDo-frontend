@@ -51,14 +51,6 @@
     width: 19%;
 } 
 
-.icon {
-    font-size: 18px;
-    margin-left: 3px;
-    margin-right: 3px;
-    border: none;
-    background: inherit;
-}
-
 .delete-icon {
     color: #ea6561;   
 }

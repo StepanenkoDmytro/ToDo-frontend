@@ -7,11 +7,14 @@ import { Component, Input } from '@angular/core';
 })
 export class StatComponent {
   @Input()
-  totalTasksInCategory: number; 
+  public totalTasksInCategory: number; 
 
   @Input()
-  completeTasksInCategory: number; 
+  public completeTasksInCategory: number; 
 
   @Input()
-  uncompleteTasksInCategory: number; 
+  public uncompleteTasksInCategory: number; 
+
+  @Input()
+  public showStat: boolean;
 }

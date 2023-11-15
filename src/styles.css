@@ -40,3 +40,28 @@
     border-bottom: 1px solid #dadada;
     padding-top: 20px;
 }
+
+.main-panel > .content {
+    margin-top: 30px;
+}
+
+app-header {
+    width: 100%;
+}
+
+.icon {
+    font-size: 18px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: none;
+    background: inherit;
+}
+
+.grey {
+    color: #8A8A8A;
+}
+
+.grey:hover {
+    color: black;
+    font-size: 20px;
+}

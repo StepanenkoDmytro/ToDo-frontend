@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  
+  @Input()
+  public categoryName: string;
+  @Input()
+  public showStat: boolean;
 
+  @Output()
+  public toggleStat = new EventEmitter<boolean>();
+
+  public onToggleStat(): void {
+    this.toggleStat.emit(!this.showStat);
+  }
 }

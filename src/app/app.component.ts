@@ -12,6 +12,8 @@ import { zip } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
+  public showStat: boolean = true;
+
   public tasks: Task[];
   public categories: Category[];
   public priorities: Priority[];
@@ -133,7 +135,7 @@ export class AppComponent implements OnInit {
       this.dataHandler.getCompletedCountInCategory(this.selectedCategory),
       this.dataHandler.getUncompletedCountInCategory(this.selectedCategory),
       this.dataHandler.getUncompleteTotalCount()
-    ).subscribe( array => {
+    ).subscribe(array => {
       this.totalTasksCountInCategory = array[0];
       this.completeTasksCountInCategory = array[1];
       this.uncompleteTasksCountInCategory = array[2];
@@ -141,5 +143,8 @@ export class AppComponent implements OnInit {
     })
   }
 
+  public toggleStat(stat: boolean): void {
+    this.showStat = stat;
+  }
 
 }
