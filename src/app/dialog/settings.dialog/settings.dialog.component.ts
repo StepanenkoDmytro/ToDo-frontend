@@ -19,7 +19,20 @@ export class SettingsDialogComponent implements OnInit {
   public ngOnInit(): void {
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
   }
+
   public onClose(): void {
     this.dialogRef.close(false);
+  }
+
+  public onAddPriority(priority: Priority): void {
+    this.dataHandler.addPriority(priority).subscribe();
+  }
+
+  public onDeletePriority(priority: Priority): void {
+    this.dataHandler.deletePriority(priority).subscribe();
+  }
+
+  public onUpdatePriority(priority: Priority): void {
+    this.dataHandler.updatePriority(priority).subscribe();
   }
 }

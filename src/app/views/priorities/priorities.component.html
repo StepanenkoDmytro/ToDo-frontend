@@ -1,6 +1,6 @@
 <div class="vertical-middle priorities" *ngFor="let priority of priorities; let index = index">
     <div class="row align-self-baseline">
-        <div class="col-7">
+        <div class="col-7" (click)="onEditPriority(priority)">
             <a class="pointer">{{ priority.title }}</a>
         </div>
 
@@ -10,15 +10,17 @@
         </div>
 
         <div class="col-1 text-left">
-            <p class="pointer gray">
+            <p class="pointer gray" (click)="onDelete(priority)">
                 <mat-icon>delete</mat-icon>
             </p>
         </div>
 
         <div class="col-1 text-left">
-            <p class="pointer gray">
+            <p class="pointer gray" (click)="onEditPriority(priority)">
                 <mat-icon>edit</mat-icon>
             </p>
         </div>
     </div>
 </div>
+
+<p class="link little" (click)="onAddPriority()">Додати пріорітет</p>

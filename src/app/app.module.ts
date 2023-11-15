@@ -34,6 +34,7 @@ import { EditCategoryDialogComponent } from './dialog/edit-category-dialog/edit-
 import { PrioritiesComponent } from './views/priorities/priorities.component';
 import { SettingsDialogComponent } from './dialog/settings.dialog/settings.dialog.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { EditPriorityDialogComponent } from './dialog/edit-priority.dialog/edit-priority.dialog.component';
 
 
 registerLocaleData(localeUk, 'uk-UA');
@@ -52,7 +53,8 @@ registerLocaleData(localeUk, 'uk-UA');
     TaskDatePipe,
     EditCategoryDialogComponent,
     PrioritiesComponent,
-    SettingsDialogComponent
+    SettingsDialogComponent,
+    EditPriorityDialogComponent
   ],
   imports: [
     BrowserModule,

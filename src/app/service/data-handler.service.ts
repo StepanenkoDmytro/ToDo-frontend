@@ -13,6 +13,7 @@ import { PriorityDAOImpl } from '../data/dao/impl/PriorityDAOImpl';
   providedIn: 'root'
 })
 export class DataHandlerService {
+
   private taskDAO = new TaskDAOImpl();
   private categoryDAO = new CategoryDAOImpl();
   private priorityDAO = new PriorityDAOImpl();
@@ -29,6 +30,18 @@ export class DataHandlerService {
 
   public getAllPriorities(): Observable<Priority[]> {
     return this.priorityDAO.getAll();
+  }
+
+  public updatePriority(priority: Priority): Observable<Priority> {
+    return this.priorityDAO.update(priority);
+  }
+
+  public deletePriority(priority: Priority): Observable<Priority> {
+    return this.priorityDAO.delete(priority.id);
+  }
+
+  public addPriority(priority: Priority): Observable<Priority> {
+    return this.priorityDAO.add(priority);
   }
 
   public addTask(task: Task): Observable<Task> {

@@ -103,7 +103,7 @@ export class TasksComponent implements OnInit {
       switch (colName) {
 
         case 'priority': {
-          return task.priority ? task.priority.id.toString() : '';
+          return task.priority && task.priority.id ? task.priority.id.toString() : '';
         }
 
         case 'category': {
