@@ -14,11 +14,18 @@ export class CategoriesComponent {
 
   public searchCategoryTitle: string;
   public indexMouseMove: number | null;
+  public  selectedCategoryMap: Map<Category, number>;
 
   @Input()
   public categories: Category[];
   @Input()
   public selectedCategory: Category | null;
+  @Input('categoryMap')
+  public set setCategoryMap(categoryMap: Map<Category, number>) {
+    this.selectedCategoryMap = categoryMap;
+  }
+  @Input()
+  public uncompletedTotal: number;
 
   @Output()
   public selectCategory = new EventEmitter<Category | null>();
