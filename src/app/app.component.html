@@ -1,4 +1,10 @@
-<div class="wrapper ">
+<div class="wrapper">
+
+  <div class="sidebar" data-background-color="white"
+       data-color="purple"
+       data-step="1"
+       data-intro="Фільтрування задач додавання/видалення/редагування категорій"
+       data-position="right">
 
     <app-categories [selectedCategory]="selectedCategory"
                     [categories]="categories"
@@ -10,7 +16,7 @@
                     (addCategory)="onAddCategory($event)"
                     (searchCategory)="onSearchCategory($event)">
     </app-categories>
-
+  </div>
 
   <div class="main-panel">
     
@@ -22,12 +28,17 @@
       </nav>
       
       <div class="content">
-          <div class="container-fluid">
+        
+            <div class="container-fluid">
+              <div data-step="2"
+                   data-intro="Список задач з статистикою"
+                   data-position="bottom">
                 <app-stat [totalTasksInCategory]="totalTasksCountInCategory"
                           [completeTasksInCategory]="completeTasksCountInCategory"
                           [uncompleteTasksInCategory]="uncompleteTasksCountInCategory"
                           [showStat]="showStat">
                 </app-stat>
+                </div>
               <div class="row">
                   <div class="col-12">
                     <app-tasks (updateTask)="onUpdateTask($event)"
@@ -44,7 +55,7 @@
                   </div>
               </div>
           </div>
-      </div>
+      <!-- </div> -->
       <app-footer></app-footer>
   </div>
 </div>

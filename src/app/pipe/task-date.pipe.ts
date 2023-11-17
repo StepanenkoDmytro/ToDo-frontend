@@ -10,7 +10,7 @@ export class TaskDatePipe implements PipeTransform {
 
   transform(date: Date | string, format: string = 'mediumDate'): string {
     if(date == null) {
-      return 'Терін відсутній';
+      return 'Термін відсутній';
     }
 
     date = new Date(date);

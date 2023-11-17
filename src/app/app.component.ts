@@ -4,6 +4,7 @@ import { DataHandlerService } from './service/data-handler.service';
 import { Category } from './model/Category';
 import { Priority } from './model/Priority';
 import { concatMap, map, of, zip } from 'rxjs';
+import { IntroService } from './service/intro.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
   private searchCategoryText: string;
 
   constructor(
-    private dataHandler: DataHandlerService
+    private dataHandler: DataHandlerService,
+    private introService: IntroService,
   ) { }
 
   public ngOnInit(): void {
@@ -41,6 +43,8 @@ export class AppComponent implements OnInit {
 
     this.fillCategories();
     this.onSelectCategory(null);
+
+    this.introService.startIntroJs(true);
   }
 
   public toggleStat(stat: boolean): void {
