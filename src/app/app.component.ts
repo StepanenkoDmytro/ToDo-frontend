@@ -12,9 +12,11 @@ import { IntroService } from './service/intro.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   public categoryMap = new Map<Category, number>();
 
   public showStat: boolean = true;
+  public menuOpened: boolean = true;
 
   public tasks: Task[];
   public categories: Category[];
@@ -51,6 +53,10 @@ export class AppComponent implements OnInit {
     this.showStat = stat;
   }
 
+  public toggleMenu(): void {
+    this.menuOpened = !this.menuOpened;
+  }
+
   public onUpdateTask(task: Task): void {
     this.dataHandler.updateTask(task).subscribe(() => {
       this.fillCategories();
@@ -70,7 +76,7 @@ export class AppComponent implements OnInit {
       ).subscribe((result: { t: Task, count: number } | null) => {
         if (result) {
           const t = result.t as Task;
-          if(t.category) this.categoryMap.set(t.category, result.count);
+          if (t.category) this.categoryMap.set(t.category, result.count);
           this.updateTasksAndStat();
         }
       });

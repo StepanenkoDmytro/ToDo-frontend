@@ -1,6 +1,10 @@
 <div class="container-fluid">
     <div class="row settings w-100">
         <div class="col-10 text-left align-self-top">
+            <button mat-button type="button" (click)="onToggleMenu()">
+                <mat-icon style="font-size: 23px;">menu</mat-icon>
+              </button>
+
             <p class="navbar-brand">{{ categoryName }}</p>
 
             <p class="link navbar-brand" (click)="onToggleStat()" *ngIf="showStat">Скрити статистику</p>

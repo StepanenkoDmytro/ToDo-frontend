@@ -1,5 +1,6 @@
-<div class="wrapper">
-
+<!-- <div class="wrapper"> -->
+  <div mat-drawer-container class="example-container">
+    <mat-drawer #drawer mode='side' [(opened)]="menuOpened" autoFocus="false">
   <div class="sidebar" data-background-color="white"
        data-color="purple"
        data-step="1"
@@ -17,13 +18,17 @@
                     (searchCategory)="onSearchCategory($event)">
     </app-categories>
   </div>
-
-  <div class="main-panel">
+</mat-drawer>
+<div mat-drawer-content>
+  <div class="main-panel"
+       [class.w-100]="!drawer.opened">
     
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        
           <app-header [categoryName]="selectedCategory ? selectedCategory.title : 'Всі'"
                       [showStat]="showStat"
-                      (toggleStat)="toggleStat($event)">
+                      (toggleStat)="toggleStat($event)"
+                      (toggleMenu)="toggleMenu()">
           </app-header>
       </nav>
       
@@ -32,7 +37,7 @@
             <div class="container-fluid">
               <div data-step="2"
                    data-intro="Список задач з статистикою"
-                   data-position="bottom">
+                   data-position="left">
                 <app-stat [totalTasksInCategory]="totalTasksCountInCategory"
                           [completeTasksInCategory]="completeTasksCountInCategory"
                           [uncompleteTasksInCategory]="uncompleteTasksCountInCategory"
@@ -58,4 +63,6 @@
       <!-- </div> -->
       <app-footer></app-footer>
   </div>
+
 </div>
+<!-- </div> -->
