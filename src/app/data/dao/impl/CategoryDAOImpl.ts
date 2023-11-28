@@ -36,7 +36,7 @@ export class CategoryDAOImpl implements CategoryDAO {
             TestData.categories.splice(TestData.categories.indexOf(tmpCategory), 1);
             return of(tmpCategory);
         }
-        throw Error("Category not found")
+        throw Error("Category not found");
     }
 
     public update(category: Category): Observable<Category> {
@@ -45,7 +45,7 @@ export class CategoryDAOImpl implements CategoryDAO {
             TestData.categories.splice(TestData.categories.indexOf(tmpCategory), 1, category);
             return of(tmpCategory);
         }
-        throw Error("Category not found")
+        throw Error("Category not found");
     }
 
     public getAll(): Observable<Category[]> {

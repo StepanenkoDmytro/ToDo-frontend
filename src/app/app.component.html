@@ -1,25 +1,25 @@
 <!-- <div class="wrapper"> -->
-  <div mat-drawer-container class="example-container">
-    <mat-drawer #drawer mode='side' [(opened)]="menuOpened" autoFocus="false">
-  <div class="sidebar" data-background-color="white"
-       data-color="purple"
-       data-step="1"
-       data-intro="Фільтрування задач додавання/видалення/редагування категорій"
-       data-position="right">
+  <mat-drawer-container [hasBackdrop]="isMobile" (backdropClick)="menuOpened = false">
+    <mat-drawer #drawer [mode]="menuMode" [(opened)]="menuOpened" autoFocus="false">
+      <div class="sidebar" data-background-color="white"
+          data-color="purple"
+          data-step="1"
+          data-intro="Фільтрування задач додавання/видалення/редагування категорій"
+          data-position="right">
 
-    <app-categories [selectedCategory]="selectedCategory"
-                    [categories]="categories"
-                    [categoryMap]="categoryMap"
-                    [uncompletedTotal]="uncompleteTotalTasksCountInCategory"
-                    (selectCategory)="onSelectCategory($event)"
-                    (deleteCategory)="onDeleteCategory($event)"
-                    (updateCategory)="onUpdateCategory($event)"
-                    (addCategory)="onAddCategory($event)"
-                    (searchCategory)="onSearchCategory($event)">
-    </app-categories>
-  </div>
-</mat-drawer>
-<div mat-drawer-content>
+        <app-categories [selectedCategory]="selectedCategory"
+                        [categories]="categories"
+                        [categoryMap]="categoryMap"
+                        [uncompletedTotal]="uncompleteTotalTasksCountInCategory"
+                        (selectCategory)="onSelectCategory($event)"
+                        (deleteCategory)="onDeleteCategory($event)"
+                        (updateCategory)="onUpdateCategory($event)"
+                        (addCategory)="onAddCategory($event)"
+                        (searchCategory)="onSearchCategory($event)">
+        </app-categories>
+      </div>
+    </mat-drawer>
+<mat-drawer-content>
   <div class="main-panel"
        [class.w-100]="!drawer.opened">
     

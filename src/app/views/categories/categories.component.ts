@@ -4,6 +4,7 @@ import { OperType } from 'src/app/dialog/OperType';
 import { EditCategoryDialogComponent } from 'src/app/dialog/edit-category-dialog/edit-category-dialog.component';
 import { Category } from 'src/app/model/Category';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-categories',
@@ -12,6 +13,8 @@ import { DataHandlerService } from 'src/app/service/data-handler.service';
 })
 export class CategoriesComponent {
 
+  public isMobile: boolean;
+  public isTablet: boolean;
   public searchCategoryTitle: string;
   public indexMouseMove: number | null;
   public  selectedCategoryMap: Map<Category, number>;
@@ -40,8 +43,13 @@ export class CategoriesComponent {
 
   constructor(
     private dataHandler: DataHandlerService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private deviceService: DeviceDetectorService
+  ) { 
+
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+  }
 
   public showTasksByCategory(category: Category | null): void {
 

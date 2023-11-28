@@ -5,6 +5,9 @@ import { Category } from './model/Category';
 import { Priority } from './model/Priority';
 import { concatMap, map, of, zip } from 'rxjs';
 import { IntroService } from './service/intro.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatDrawerMode } from '@angular/material/sidenav';
+
 
 @Component({
   selector: 'app-root',
@@ -12,17 +15,17 @@ import { IntroService } from './service/intro.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   public categoryMap = new Map<Category, number>();
 
   public showStat: boolean = true;
   public menuOpened: boolean = true;
+  public menuMode: MatDrawerMode;
 
   public tasks: Task[];
   public categories: Category[];
   public priorities: Priority[];
-  public selectedCategory: Category | null;
-
+  public selectedCategory: Category | null = null;
 
   public totalTasksCountInCategory: number;
   public completeTasksCountInCategory: number;
@@ -30,14 +33,25 @@ export class AppComponent implements OnInit {
   public uncompleteTotalTasksCountInCategory: number;
 
   private searchText: string;
-  private statusFilter: boolean | null;
-  private priorityFilter: Priority | null;
+  private statusFilter: boolean | null = null;
+  private priorityFilter: Priority | null = null;
   private searchCategoryText: string;
+
+  public isMobile: boolean;
+  private isTablet: boolean;
 
   constructor(
     private dataHandler: DataHandlerService,
     private introService: IntroService,
-  ) { }
+    private deviceService: DeviceDetectorService
+  ) {
+
+    this.isMobile = this.deviceService.isMobile();
+    this.isTablet = this.deviceService.isTablet();
+
+    this.showStat = true ? !this.isMobile : false;
+    this.setMenuValues();
+  }
 
   public ngOnInit(): void {
     this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities)
@@ -46,7 +60,9 @@ export class AppComponent implements OnInit {
     this.fillCategories();
     this.onSelectCategory(null);
 
-    this.introService.startIntroJs(true);
+    if (!this.isMobile && !this.isTablet) {
+      this.introService.startIntroJs(true);
+    }
   }
 
   public toggleStat(stat: boolean): void {
@@ -198,5 +214,15 @@ export class AppComponent implements OnInit {
       this.uncompleteTasksCountInCategory = array[2];
       this.uncompleteTotalTasksCountInCategory = array[3];
     })
+  }
+
+  private setMenuValues(): void {
+    if (this.isMobile) {
+      this.menuMode = 'over';
+      this.menuOpened = false;
+    } else {
+      this.menuMode = 'push';
+      this.menuOpened = true;
+    }
   }
 }
