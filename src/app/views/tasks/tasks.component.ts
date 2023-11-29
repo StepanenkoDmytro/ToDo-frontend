@@ -10,6 +10,7 @@ import { Category } from 'src/app/model/Category';
 import { Priority } from 'src/app/model/Priority';
 import { Task } from 'src/app/model/Task';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { DataHandlerService } from 'src/app/service/data-handler.service';
 })
 export class TasksComponent implements OnInit {
 
+  public isMobile: boolean;
   public displayedColumns: string[] = ['color', 'id', 'title', 'date', 'priority', 'category', 'operation', 'status'];
   public dataSource: MatTableDataSource<Task>;
 
@@ -63,8 +65,12 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private dataHandler: DataHandlerService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private deviceService: DeviceDetectorService
+  ) {
+    
+    this.isMobile = this.deviceService.isMobile();
+  }
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
@@ -73,7 +79,7 @@ export class TasksComponent implements OnInit {
     this.onSelectCategory(null);
   }
 
-  public onToogleStatus(task: Task): void {
+  public onToggleStatus(task: Task): void {
     task.completed = !task.completed;
     this.updateTask.emit(task);
   }
@@ -209,5 +215,13 @@ export class TasksComponent implements OnInit {
       this.selectedPriorityFilter = priority;
       this.filterByPriority.emit(this.selectedPriorityFilter);
     }
+  }
+
+  public getMobilePriorityBgColor(task: Task): string {
+
+    if (task.priority != null && !task.completed) {
+      return task.priority.color;
+    }
+    return 'none';
   }
 }

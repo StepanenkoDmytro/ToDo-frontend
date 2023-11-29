@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 
+
 @Pipe({
   name: 'taskDate'
 })
@@ -8,8 +9,8 @@ export class TaskDatePipe implements PipeTransform {
 
   constructor(@Inject(LOCALE_ID) private locale: string) {}
 
-  transform(date: Date | string, format: string = 'mediumDate'): string {
-    if(date == null) {
+  transform(date: Date | string | undefined, format: string = 'mediumDate'): string {
+    if(!date) {
       return 'Термін відсутній';
     }
 
