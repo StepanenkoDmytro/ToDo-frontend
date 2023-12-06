@@ -36,6 +36,7 @@ import { PrioritiesComponent } from './views/priorities/priorities.component';
 import { SettingsDialogComponent } from './dialog/settings.dialog/settings.dialog.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { EditPriorityDialogComponent } from './dialog/edit-priority.dialog/edit-priority.dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 registerLocaleData(localeUk, 'uk-UA');
@@ -75,6 +76,7 @@ registerLocaleData(localeUk, 'uk-UA');
     MatSidenavModule,
     FormsModule,
     ColorPickerModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'uk-UA' }
