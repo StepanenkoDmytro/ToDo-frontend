@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Category } from 'src/app/model/Category';
 import { Priority } from 'src/app/model/Priority';
 import { Task } from 'src/app/model/Task';
-import { DataHandlerService } from 'src/app/service/data-handler.service';
 import { ConfirmDialogComponent } from '../confirm.dialog/confirm.dialog.component';
 import { OperType } from '../OperType';
 
@@ -31,7 +30,6 @@ export class EditTaskDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<EditTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     private data: [Task, string, OperType],
-    private dataHandler: DataHandlerService,
     private dialog: MatDialog
   ) { }
 
@@ -50,8 +48,8 @@ export class EditTaskDialogComponent implements OnInit {
       this.tmpPriority = this.task.priority;
     }
 
-    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
-    this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
+    // this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+    // this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities);
   }
 
   public onConfirm(): void {

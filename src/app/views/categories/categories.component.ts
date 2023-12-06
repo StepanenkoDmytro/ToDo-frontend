@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { OperType } from 'src/app/dialog/OperType';
 import { EditCategoryDialogComponent } from 'src/app/dialog/edit-category-dialog/edit-category-dialog.component';
 import { Category } from 'src/app/model/Category';
-import { DataHandlerService } from 'src/app/service/data-handler.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
@@ -42,7 +41,6 @@ export class CategoriesComponent {
   public searchCategory = new EventEmitter<string>();
 
   constructor(
-    private dataHandler: DataHandlerService,
     private dialog: MatDialog,
     private deviceService: DeviceDetectorService
   ) { 

@@ -9,7 +9,6 @@ import { EditTaskDialogComponent } from 'src/app/dialog/edit-task.dialog/edit-ta
 import { Category } from 'src/app/model/Category';
 import { Priority } from 'src/app/model/Priority';
 import { Task } from 'src/app/model/Task';
-import { DataHandlerService } from 'src/app/service/data-handler.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 
@@ -64,7 +63,6 @@ export class TasksComponent implements OnInit {
   public addTask = new EventEmitter<Task>();
 
   constructor(
-    private dataHandler: DataHandlerService,
     private dialog: MatDialog,
     private deviceService: DeviceDetectorService
   ) {

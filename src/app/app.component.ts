@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from './model/Task';
-import { DataHandlerService } from './service/data-handler.service';
 import { Category } from './model/Category';
 import { Priority } from './model/Priority';
 import { concatMap, map, of, zip } from 'rxjs';
@@ -41,7 +40,6 @@ export class AppComponent implements OnInit {
   private isTablet: boolean;
 
   constructor(
-    private dataHandler: DataHandlerService,
     private introService: IntroService,
     private deviceService: DeviceDetectorService
   ) {
@@ -54,8 +52,8 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities)
-    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+    // this.dataHandler.getAllPriorities().subscribe(priorities => this.priorities = priorities)
+    // this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
 
     this.fillCategories();
     this.onSelectCategory(null);
@@ -74,55 +72,55 @@ export class AppComponent implements OnInit {
   }
 
   public onUpdateTask(task: Task): void {
-    this.dataHandler.updateTask(task).subscribe(() => {
-      this.fillCategories();
+    // this.dataHandler.updateTask(task).subscribe(() => {
+    //   this.fillCategories();
 
-      this.updateTasksAndStat();
-    })
+    //   this.updateTasksAndStat();
+    // })
   }
 
   public onDeleteTask(task: Task): void {
     if (task.id) {
-      this.dataHandler.deleteTask(task.id).pipe(
-        concatMap((deletedTask: Task) => {
-          return deletedTask.category ? this.dataHandler.getUncompletedCountInCategory(deletedTask.category).pipe(
-            map((count: number) => ({ t: deletedTask, count }))
-          ) : of(null);
-        })
-      ).subscribe((result: { t: Task, count: number } | null) => {
-        if (result) {
-          const t = result.t as Task;
-          if (t.category) this.categoryMap.set(t.category, result.count);
-          this.updateTasksAndStat();
-        }
-      });
+      // this.dataHandler.deleteTask(task.id).pipe(
+      //   concatMap((deletedTask: Task) => {
+      //     return deletedTask.category ? this.dataHandler.getUncompletedCountInCategory(deletedTask.category).pipe(
+      //       map((count: number) => ({ t: deletedTask, count }))
+      //     ) : of(null);
+      //   })
+      // ).subscribe((result: { t: Task, count: number } | null) => {
+      //   if (result) {
+      //     const t = result.t as Task;
+      //     if (t.category) this.categoryMap.set(t.category, result.count);
+      //     this.updateTasksAndStat();
+      //   }
+      // });
     }
   }
 
   public onAddTask(task: Task): void {
-    this.dataHandler.addTask(task).pipe(
-      concatMap((addTask: Task) => {
-        return addTask.category ? this.dataHandler.getUncompletedCountInCategory(addTask.category).pipe(
-          map((count: number) => ({ t: addTask, count }))
-        ) : of(null);
-      })
-    ).subscribe((result: { t: Task, count: number } | null) => {
-      if (result) {
-        const t = result.t;
+    // this.dataHandler.addTask(task).pipe(
+    //   concatMap((addTask: Task) => {
+    //     return addTask.category ? this.dataHandler.getUncompletedCountInCategory(addTask.category).pipe(
+    //       map((count: number) => ({ t: addTask, count }))
+    //     ) : of(null);
+    //   })
+    // ).subscribe((result: { t: Task, count: number } | null) => {
+    //   if (result) {
+    //     const t = result.t;
 
-        if (t.category) {
-          this.categoryMap.set(t.category, result.count);
-        }
+    //     if (t.category) {
+    //       this.categoryMap.set(t.category, result.count);
+    //     }
 
-        this.updateTasksAndStat();
-      }
-    });
+    //     this.updateTasksAndStat();
+    //   }
+    // });
   }
 
   public onAddCategory(category: string): void {
-    this.dataHandler.addCategory(category).subscribe(() => {
-      this.updateCategories();
-    })
+    // this.dataHandler.addCategory(category).subscribe(() => {
+    //   this.updateCategories();
+    // })
   }
 
   public onSelectCategory(category: Category | null) {
@@ -133,19 +131,19 @@ export class AppComponent implements OnInit {
 
   public onDeleteCategory(category: Category): void {
     if (category.id) {
-      this.dataHandler.deleteCategory(category.id).subscribe((cat) => {
-        this.selectedCategory = null;
-        this.categoryMap.delete(cat);
-        this.onSelectCategory(this.selectedCategory);
-        this.updateTasks();
-      })
+      // this.dataHandler.deleteCategory(category.id).subscribe((cat) => {
+      //   this.selectedCategory = null;
+      //   this.categoryMap.delete(cat);
+      //   this.onSelectCategory(this.selectedCategory);
+      //   this.updateTasks();
+      // })
     }
   }
 
   public onUpdateCategory(category: Category): void {
-    this.dataHandler.updateCategory(category).subscribe(() => {
-      this.onSearchCategory(this.searchCategoryText);
-    })
+    // this.dataHandler.updateCategory(category).subscribe(() => {
+    //   this.onSearchCategory(this.searchCategoryText);
+    // })
   }
 
   public onFilterTaskByTitle(search: string): void {
@@ -166,7 +164,7 @@ export class AppComponent implements OnInit {
   public onSearchCategory(search: string): void {
     this.searchCategoryText = search;
 
-    this.dataHandler.searchCategories(search).subscribe(categories => this.categories = categories);
+    // this.dataHandler.searchCategories(search).subscribe(categories => this.categories = categories);
   }
 
   public fillCategories(): void {
@@ -176,13 +174,13 @@ export class AppComponent implements OnInit {
 
     this.categories = this.categories.sort((a, b) => a.title.localeCompare(b.title));
 
-    this.categories.forEach(cat => {
-      this.dataHandler.getUncompletedCountInCategory(cat).subscribe(count => this.categoryMap.set(cat, count));
-    });
+    // this.categories.forEach(cat => {
+    //   this.dataHandler.getUncompletedCountInCategory(cat).subscribe(count => this.categoryMap.set(cat, count));
+    // });
   }
 
   private updateCategories(): void {
-    this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
+    // this.dataHandler.getAllCategories().subscribe(categories => this.categories = categories);
   }
 
   private updateTasksAndStat(): void {
@@ -192,28 +190,28 @@ export class AppComponent implements OnInit {
 
   private updateTasks(): void {
 
-    this.dataHandler.searchTasks(
-      this.selectedCategory,
-      this.searchText,
-      this.statusFilter,
-      this.priorityFilter
-    ).subscribe((tasks: Task[]) => {
-      this.tasks = tasks;
-    })
+    // this.dataHandler.searchTasks(
+    //   this.selectedCategory,
+    //   this.searchText,
+    //   this.statusFilter,
+    //   this.priorityFilter
+    // ).subscribe((tasks: Task[]) => {
+    //   this.tasks = tasks;
+    // })
   }
 
   private updateStat(): void {
-    zip(
-      this.dataHandler.getTotalCountInCategory(this.selectedCategory),
-      this.dataHandler.getCompletedCountInCategory(this.selectedCategory),
-      this.dataHandler.getUncompletedCountInCategory(this.selectedCategory),
-      this.dataHandler.getUncompleteTotalCount()
-    ).subscribe(array => {
-      this.totalTasksCountInCategory = array[0];
-      this.completeTasksCountInCategory = array[1];
-      this.uncompleteTasksCountInCategory = array[2];
-      this.uncompleteTotalTasksCountInCategory = array[3];
-    })
+    // zip(
+    //   this.dataHandler.getTotalCountInCategory(this.selectedCategory),
+    //   this.dataHandler.getCompletedCountInCategory(this.selectedCategory),
+    //   this.dataHandler.getUncompletedCountInCategory(this.selectedCategory),
+    //   this.dataHandler.getUncompleteTotalCount()
+    // ).subscribe(array => {
+    //   this.totalTasksCountInCategory = array[0];
+    //   this.completeTasksCountInCategory = array[1];
+    //   this.uncompleteTasksCountInCategory = array[2];
+    //   this.uncompleteTotalTasksCountInCategory = array[3];
+    // })
   }
 
   private setMenuValues(): void {
