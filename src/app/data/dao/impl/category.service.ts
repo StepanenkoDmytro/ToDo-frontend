@@ -1,39 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { CategoryDAO } from '../interface/CategoryDAO';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/Category';
 import { CategorySearchValues } from '../search/SearchObjects';
 import { HttpClient } from '@angular/common/http';
+import { CommonService } from './common.service';
+
+export const CATEGORY_URL_TOKEN = new InjectionToken<string>('url');
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService implements CategoryDAO {
-  url = 'http://localhost:8080/category';
+export class CategoryService extends CommonService<Category> implements CategoryDAO {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    @Inject(CATEGORY_URL_TOKEN) private baseUrl: string,
+    httpClient: HttpClient) {
+
+      super(baseUrl, httpClient);
+  }
 
   public findCategories(categorySearchValues: CategorySearchValues): Observable<any> {
-    return this.httpClient.post<Category[]>(this.url + '/search', categorySearchValues);
-  }
-
-  public getAll(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.url + '/all');
-  }
-
-  public get(id: number): Observable<Category> {
-    return this.httpClient.get<Category>(this.url + '/id/' + id);
-  }
-
-  public add(category: Category): Observable<Category> {
-    return this.httpClient.post<Category>(this.url + '/add', category);
-  }
-
-  public update(category: Category): Observable<Category> {
-    return this.httpClient.put<Category>(this.url + '/update', category);
-  }
-
-  public delete(id: number): Observable<Category> {
-    return this.httpClient.delete<Category>(this.url + '/delete/' + id);
+    return this.httpClient.post<Category[]>(this.baseUrl + '/search', categorySearchValues);
   }
 }

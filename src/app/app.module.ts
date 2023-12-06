@@ -37,6 +37,10 @@ import { SettingsDialogComponent } from './dialog/settings.dialog/settings.dialo
 import { ColorPickerModule } from 'ngx-color-picker';
 import { EditPriorityDialogComponent } from './dialog/edit-priority.dialog/edit-priority.dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TASK_URL_TOKEN } from './data/dao/impl/task.service';
+import { CATEGORY_URL_TOKEN } from './data/dao/impl/category.service';
+import { PRIORITY_URL_TOKEN } from './data/dao/impl/priority.service';
+import { STAT_URL_TOKEN } from './data/dao/impl/stat.service';
 
 
 registerLocaleData(localeUk, 'uk-UA');
@@ -79,7 +83,26 @@ registerLocaleData(localeUk, 'uk-UA');
     HttpClientModule,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'uk-UA' }
+    {
+      provide: LOCALE_ID,
+      useValue: 'uk-UA'
+    },
+    {
+      provide: TASK_URL_TOKEN,
+      useValue: 'http://localhost:8080/task'
+    },
+    {
+      provide: CATEGORY_URL_TOKEN,
+      useValue: 'http://localhost:8080/category'
+    },
+    {
+      provide: PRIORITY_URL_TOKEN,
+      useValue: 'http://localhost:8080/priority'
+    },
+    {
+      provide: STAT_URL_TOKEN,
+      useValue: 'http://localhost:8080/stat'
+    }
   ],
   bootstrap: [AppComponent]
 })
